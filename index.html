@@ -1,8 +1,27 @@
 <html>
   <body>
+    <!-- Elemento contêiner (div) onde o conteúdo dinâmico será inserido via JavaScript -->
     <div id="app"></div>
+
+    <!-- Bloco de script JavaScript executado no navegador -->
     <script type="text/javascript">
+      // 1. Busca e armazena na constante 'app' a referência da <div> que tem o id="app"
       const app = document.getElementById('app');
+
+      // 2. Cria um novo elemento HTML de título de nível 1 (<h1>) na memória (ainda fora da página)
+      const header = document.createElement('h1');
+
+      // 3. Cria uma string com a mensagem desejada
+      const text = 'Develop. Preview. Ship.';
+      
+      // 4. Cria um nó de texto (TextNode) contendo a string criada no passo anterior
+      const headerContent = document.createTextNode(text);
+
+      // 5. Insere o nó de texto dentro da tag <h1>, ficando: <h1>Develop. Preview. Ship.</h1>
+      header.appendChild(headerContent);
+
+      // 6. Insere a tag <h1> (já com o texto) dentro da <div id="app">, tornando-a visível na tela
+      app.appendChild(header);
     </script>
   </body>
 </html>
