@@ -1,27 +1,39 @@
 <html>
+  <head>
+    <!-- Mapeia os identificadores 'react' e 'react-dom/client' para suas URLs em CDN -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@latest?dev",
+          "react-dom/client": "https://esm.sh/react-dom@latest/client?dev"
+        }
+      }
+    </script>
+  </head>
   <body>
-    <!-- Elemento contêiner (div) onde o conteúdo dinâmico será inserido via JavaScript -->
+    <!-- Ponto de montagem onde a árvore do React será injetada -->
     <div id="app"></div>
 
-    <!-- Bloco de script JavaScript executado no navegador -->
-    <script type="text/javascript">
-      // 1. Busca e armazena na constante 'app' a referência da <div> que tem o id="app"
-      const app = document.getElementById('app');
+    <!-- 
+      type="module" é obrigatório aqui:
+      1. Permite o uso de 'import' / 'export' no navegador.
+      2. Resolve os nomes 'react' e 'react-dom/client' via importmap.
+    -->
+    <script type="module">
+      // 1. Importa a biblioteca base do React
+      import React from 'react';
 
-      // 2. Cria um novo elemento HTML de título de nível 1 (<h1>) na memória (ainda fora da página)
-      const header = document.createElement('h1');
+      // 2. Importa a função createRoot da API cliente do React 18+
+      import { createRoot } from 'react-dom/client';
 
-      // 3. Cria uma string com a mensagem desejada
-      const text = 'Develop. Preview. Ship.';
-      
-      // 4. Cria um nó de texto (TextNode) contendo a string criada no passo anterior
-      const headerContent = document.createTextNode(text);
+      // 3. Localiza o contêiner HTML na página
+      const domNode = document.getElementById('app');
 
-      // 5. Insere o nó de texto dentro da tag <h1>, ficando: <h1>Develop. Preview. Ship.</h1>
-      header.appendChild(headerContent);
+      // 4. Cria a raiz do React (Root) vinculada à div #app
+      const root = createRoot(domNode);
 
-      // 6. Insere a tag <h1> (já com o texto) dentro da <div id="app">, tornando-a visível na tela
-      app.appendChild(header);
+      // 5. Renderiza a interface declarativa na tela
+      root.render(<h1>Develop. Preview. Ship.</h1>);
     </script>
   </body>
 </html>
