@@ -33,6 +33,13 @@
       return <h1>Develop. Preview. Ship.</h1>;
       }
 
+      function HomePage() {
+          <div>
+      {/* Nesting the Header component */}
+      <Header />
+    </div>
+      }
+
       // O Babel converterá <h1>...</h1> em tempo de execução para JavaScript que o navegador entende
       root.render(<Header />);
     </script>
