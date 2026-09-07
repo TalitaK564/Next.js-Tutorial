@@ -5,9 +5,8 @@
       {
         "imports": {
           "react": "https://esm.sh/react@latest?dev",
-          "react-dom/client": "https://esm.sh/react-dom@latest/client?dev"
+          "react-dom/client": "https://esm.sh/react-dom@latest/client?dev",
           "react/jsx-runtime": "https://esm.sh/react@latest/jsx-runtime?dev"
-
         }
       }
     </script>
@@ -20,14 +19,6 @@
     <!-- Contêiner HTML onde a aplicação React será injetada -->
     <div id="app"></div>
 
-    <!-- 
-      Configurações críticas da tag de script:
-      - type="text/babel": impede o navegador de rodar o script como JS puro (evitando erro no JSX) 
-        e avisa ao Babel para interceptar e compilar este bloco.
-      - data-type="module": instrui o Babel a tratar o código resultante como um Módulo ES nativo, 
-        permitindo que o 'importmap' acima resolva os pacotes.
-      - data-presets="react": ativa a transformação de sintaxe JSX para chamadas React.createElement/jsxRuntime.
-    -->
     <script type="text/babel" data-type="module" data-presets="react">
       import React from 'react';
       import { createRoot } from 'react-dom/client';
