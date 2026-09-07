@@ -1,6 +1,6 @@
 <html>
   <head>
-    <!-- Mapeia os identificadores 'react' e 'react-dom/client' para suas URLs em CDN -->
+    <!-- 1. Import map: ensina o navegador a resolver os nomes 'react' e 'react-dom/client' via CDN -->
     <script type="importmap">
       {
         "imports": {
@@ -9,30 +9,34 @@
         }
       }
     </script>
+
+    <!-- 2. Babel Standalone: compilador JavaScript carregado diretamente no navegador -->
+    <script src="https://unpkg.com/@babel/standalone@latest/babel.min.js"></script>
   </head>
+
   <body>
-    <!-- Ponto de montagem onde a árvore do React será injetada -->
+    <!-- Contêiner HTML onde a aplicação React será injetada -->
     <div id="app"></div>
 
     <!-- 
-      type="module" é obrigatório aqui:
-      1. Permite o uso de 'import' / 'export' no navegador.
-      2. Resolve os nomes 'react' e 'react-dom/client' via importmap.
+      Configurações críticas da tag de script:
+      - type="text/babel": impede o navegador de rodar o script como JS puro (evitando erro no JSX) 
+        e avisa ao Babel para interceptar e compilar este bloco.
+      - data-type="module": instrui o Babel a tratar o código resultante como um Módulo ES nativo, 
+        permitindo que o 'importmap' acima resolva os pacotes.
+      - data-presets="react": ativa a transformação de sintaxe JSX para chamadas React.createElement/jsxRuntime.
     -->
-    <script type="module">
-      // 1. Importa a biblioteca base do React
+    <script type="text/babel" data-type="module" data-presets="react">
       import React from 'react';
-
-      // 2. Importa a função createRoot da API cliente do React 18+
       import { createRoot } from 'react-dom/client';
 
-      // 3. Localiza o contêiner HTML na página
+      // Localiza o elemento contêiner
       const domNode = document.getElementById('app');
 
-      // 4. Cria a raiz do React (Root) vinculada à div #app
+      // Inicializa a raiz do React 18+
       const root = createRoot(domNode);
 
-      // 5. Renderiza a interface declarativa na tela
+      // O Babel converterá <h1>...</h1> em tempo de execução para JavaScript que o navegador entende
       root.render(<h1>Develop. Preview. Ship.</h1>);
     </script>
   </body>
